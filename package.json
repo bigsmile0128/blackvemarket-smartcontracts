@@ -1,5 +1,10 @@
 {
   "dependencies": {
+    "nodemon": "^2.0.19",
     "truffle": "^5.5.29"
+  },
+  "scripts": {
+    "test": "npx truffle test",
+    "develop": "nodemon -e js,sol --exec 'npx truffle test'"
   }
 }

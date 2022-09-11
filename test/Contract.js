@@ -15,4 +15,11 @@ contract("Contract", (accounts) => {
     const owner = await contractInstance.owner.call();
     expect(owner).to.equal(firstAccount);
   });
+
+  it("echoes what we send", async () => {
+    const randomValue = String(Math.random());
+    const contractInstance = await Contract.new();
+    const echo = await contractInstance.echo(randomValue);
+    expect(echo).to.equal(randomValue);
+  });
 });
