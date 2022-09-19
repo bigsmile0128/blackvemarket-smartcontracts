@@ -20,6 +20,13 @@ async function main() {
 
   console.log("NFTMint deployed to: ", erc721Token.address);
 
+  const ERC721Factory = await hre.thor.getContractFactory("ERC721Factory");
+  const erc721Factory = await ERC721Factory.deploy();
+
+  await erc721Factory.deployed();
+
+  console.log("NFTMint deployed to: ", erc721Factory.address);
+
   fs.writeFileSync(
     "./status.json",
     JSON.stringify(
