@@ -1,10 +1,8 @@
 {
   "dependencies": {
-    "nodemon": "^2.0.19",
-    "truffle": "^5.5.29"
-  },
-  "scripts": {
-    "test": "npx truffle test",
-    "develop": "nodemon -e js,sol --exec 'npx truffle test'"
+    "@nomicfoundation/hardhat-toolbox": "^2.0.0",
+    "@openzeppelin/contracts": "^4.7.3",
+    "@vechain.energy/hardhat-thor": "^0.3.1",
+    "ethers": "^5.7.1"
   }
 }
