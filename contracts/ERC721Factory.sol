@@ -2,7 +2,7 @@
 
 pragma solidity ^0.8.7;
 
-import "./ERC721NFT.sol";
+import "./ERC721Mint.sol";
 import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
 
 // For a full decentralized nft marketplace
@@ -17,7 +17,7 @@ error NotApprovedForMarketplace();
 error PriceMustBeAboveZero();
 
 contract ERC721Factory is ReentrancyGuard {
-    ERC721NFT public erc721nft;
+    ERC721Mint public erc721nft;
     struct Listing {
         uint256 price;
         address seller;
@@ -82,10 +82,9 @@ contract ERC721Factory is ReentrancyGuard {
     constructor() {}
 
     function createToken(
-        string memory _name,
-        string memory _symbol
+        address marketplace_address
     ) public returns (address _contractAddr) {
-        erc721nft = new ERC721NFT(_name, _symbol);
+        erc721nft = new ERC721Mint(marketplace_address);
         _contractAddr = address(erc721nft);
         return _contractAddr;
     }

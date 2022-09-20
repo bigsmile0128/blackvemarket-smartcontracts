@@ -11,14 +11,13 @@ import "./royalties/contracts/impl/RoyaltiesV2Impl.sol";
 import "./royalties/contracts/LibPart.sol";
 import "./royalties/contracts/LibRoyaltiesV2.sol";
 
-contract NFT is ERC721URIStorage, ERC721Enumerable, RoyaltiesV2Impl {
+contract ERC721Mint is ERC721URIStorage, ERC721Enumerable, RoyaltiesV2Impl {
     using Counters for Counters.Counter;
     Counters.Counter private nftTokenId;
 
     address contractAddress;
 
-    constructor(address marketplaceAddress, string memory _name, string memory _symbol) {
-        ERC721(_name, _symbol)
+    constructor(address marketplaceAddress) ERC721("Gangster NFT", "Gangster") {
         contractAddress = marketplaceAddress;
     }
  
@@ -85,10 +84,6 @@ contract NFT is ERC721URIStorage, ERC721Enumerable, RoyaltiesV2Impl {
         returns (bool)
     {
         if (interfaceId == LibRoyaltiesV2._INTERFACE_ID_ROYALTIES) {
-            return true;
-        }
-
-        if (interfaceId == _INTERFACE_ID_ERC2981) {
             return true;
         }
 

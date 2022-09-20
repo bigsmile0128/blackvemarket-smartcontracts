@@ -11,7 +11,7 @@ async function main() {
   await hre.run("compile");
 
   /* NFTMintContract Deployment */
-  const ERC721Token = await hre.thor.getContractFactory("NFT");
+  const ERC721Token = await hre.thor.getContractFactory("ERC721Mint");
   const erc721Token = await ERC721Token.deploy(
     "0xD848C998a36c05A0afE48f0E6Bfa40232a94Fd9B"
   );
