@@ -10,28 +10,33 @@ const fs = require("fs");
 async function main() {
   await hre.run("compile");
 
-  /* NFTMintContract Deployment */
-  const ERC721Token = await hre.thor.getContractFactory("ERC721Mint");
-  const erc721Token = await ERC721Token.deploy(
-    "0xD848C998a36c05A0afE48f0E6Bfa40232a94Fd9B"
-  );
+  const [signer] = await hre.thor.getSigners();
+  const provider = await hre.thor.getProvider();
+  console.log(signer._address);
+  console.log(await provider.getBalance(signer._address));
 
-  await erc721Token.deployed();
-
-  console.log("NFTMint deployed to: ", erc721Token.address);
-
+  /* NFTMint Fixed Price Marketplace Deployment */
   const ERC721Factory = await hre.thor.getContractFactory("ERC721Factory");
   const erc721Factory = await ERC721Factory.deploy();
 
   await erc721Factory.deployed();
 
-  console.log("NFTMint deployed to: ", erc721Factory.address);
+  console.log("ERC721Factory deployed to: ", erc721Factory.address);
+
+  /* NFTMintContract Deployment */
+  const ERC721Mint = await hre.thor.getContractFactory("ERC721Mint");
+  const erc721Mint = await ERC721Mint.deploy(erc721Factory.address);
+
+  await erc721Mint.deployed();
+
+  console.log("ERC721Mint deployed to: ", erc721Mint.address);
 
   fs.writeFileSync(
     "./status.json",
     JSON.stringify(
       {
-        nftAddress: erc721Token.address,
+        mintAddress: erc721Mint.address,
+        nftFactoryAddress: erc721Factory.address,
       },
       "",
       2

@@ -59,7 +59,7 @@ contract ERC721Mint is ERC721URIStorage, ERC721Enumerable, RoyaltiesV2Impl {
 
         _setTokenURI(id, nftTokenURl);
 
-        setApprovalForAll(contractAddress, true);
+        // setApprovalForAll(contractAddress, true);
 
         return id;
     }

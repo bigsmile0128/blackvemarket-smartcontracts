@@ -81,13 +81,13 @@ contract ERC721Factory is ReentrancyGuard {
 
     constructor() {}
 
-    function createToken(
-        address marketplace_address
-    ) public returns (address _contractAddr) {
-        erc721nft = new ERC721Mint(marketplace_address);
-        _contractAddr = address(erc721nft);
-        return _contractAddr;
-    }
+    // function createToken(
+    //     address marketplace_address
+    // ) public returns (address _contractAddr) {
+    //     erc721nft = new ERC721Mint(marketplace_address);
+    //     _contractAddr = address(erc721nft);
+    //     return _contractAddr;
+    // }
 
     /////////////////////
     // Main Functions //
