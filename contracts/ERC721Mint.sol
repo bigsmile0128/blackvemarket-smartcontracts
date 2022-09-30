@@ -49,7 +49,7 @@ contract ERC721Mint is ERC721URIStorage, ERC721Enumerable, RoyaltiesV2Impl {
         return super.tokenURI(tokenId);
     }
 
-    function createNFtToken(string memory nftTokenURl)
+    function createNFtToken(string memory nftTokenURI)
         public
         returns (uint256)
     {
@@ -57,9 +57,9 @@ contract ERC721Mint is ERC721URIStorage, ERC721Enumerable, RoyaltiesV2Impl {
         uint256 id = nftTokenId.current();
         _mint(msg.sender, id);
 
-        _setTokenURI(id, nftTokenURl);
+        _setTokenURI(id, nftTokenURI);
 
-        // setApprovalForAll(contractAddress, true);
+        approve(contractAddress, id);
 
         return id;
     }

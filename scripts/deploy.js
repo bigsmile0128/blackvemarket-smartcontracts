@@ -25,7 +25,9 @@ async function main() {
 
   /* NFTMintContract Deployment */
   const ERC721Mint = await hre.thor.getContractFactory("ERC721Mint");
-  const erc721Mint = await ERC721Mint.deploy(erc721Factory.address);
+  const erc721Mint = await ERC721Mint.deploy(
+    "0x2a81Ca39185349B0e54cA86d965DDC8423368952"
+  );
 
   await erc721Mint.deployed();
 
@@ -46,6 +48,7 @@ async function main() {
 
 // We recommend this pattern to be able to use async/await everywhere
 // and properly handle errors.
+
 main().catch((error) => {
   console.error(error);
   process.exitCode = 1;
