@@ -15,11 +15,9 @@ contract ERC721Mint is ERC721URIStorage, ERC721Enumerable, RoyaltiesV2Impl {
     using Counters for Counters.Counter;
     Counters.Counter private nftTokenId;
 
-    address contractAddress;
-
-    constructor(address marketplaceAddress) ERC721("Gangster NFT", "Gangster") {
-        contractAddress = marketplaceAddress;
-    }
+    constructor(string memory _name, string memory _symbol)
+        ERC721(_name, _symbol)
+    {}
  
     function _beforeTokenTransfer(
         address from,
@@ -58,9 +56,7 @@ contract ERC721Mint is ERC721URIStorage, ERC721Enumerable, RoyaltiesV2Impl {
         _mint(msg.sender, id);
 
         _setTokenURI(id, nftTokenURI);
-
-        approve(contractAddress, id);
-
+        
         return id;
     }
 
@@ -101,7 +97,7 @@ contract ERC721Mint is ERC721URIStorage, ERC721Enumerable, RoyaltiesV2Impl {
         _transfer(from, to, tokenId);
     }
 
-    function getContractAddress() public view returns (address) {
-        return contractAddress;
-    }
+    // function getContractAddress() public view returns (address) {
+    //     return contractAddress;
+    // }
 }

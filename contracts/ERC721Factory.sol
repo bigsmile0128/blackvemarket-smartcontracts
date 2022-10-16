@@ -81,13 +81,14 @@ contract ERC721Factory is ReentrancyGuard {
 
     constructor() {}
 
-    // function createToken(
-    //     address marketplace_address
-    // ) public returns (address _contractAddr) {
-    //     erc721nft = new ERC721Mint(marketplace_address);
-    //     _contractAddr = address(erc721nft);
-    //     return _contractAddr;
-    // }
+    function createToken(
+                string memory _name,
+        string memory _symbol
+    ) public returns (address _contractAddr) {
+        erc721nft = new ERC721Mint(_name, _symbol);
+        _contractAddr = address(erc721nft);
+        return _contractAddr;
+    }
 
     /////////////////////
     // Main Functions //
@@ -117,7 +118,6 @@ contract ERC721Factory is ReentrancyGuard {
         s_listings[nftAddress][tokenId] = Listing(price, msg.sender);
         emit ItemListed(msg.sender, nftAddress, tokenId, price);
     }
-
 
     /*
      * @notice Method for cancelling listing

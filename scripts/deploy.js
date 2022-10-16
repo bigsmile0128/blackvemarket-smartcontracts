@@ -15,7 +15,15 @@ async function main() {
   console.log(signer._address);
   console.log(await provider.getBalance(signer._address));
 
-  /* NFTMint Fixed Price Marketplace Deployment */
+  /* NFTMintContract Deployment */
+  const ERC721Mint = await hre.thor.getContractFactory("ERC721Mint");
+  const erc721Mint = await ERC721Mint.deploy("Ganster NFT", "Gangster");
+
+  await erc721Mint.deployed();
+
+  console.log("ERC721Mint deployed to: ", erc721Mint.address);
+
+  /* Fixed Price NFTMarketplace Deployment */
   const ERC721Factory = await hre.thor.getContractFactory("ERC721Factory");
   const erc721Factory = await ERC721Factory.deploy();
 
@@ -23,15 +31,18 @@ async function main() {
 
   console.log("ERC721Factory deployed to: ", erc721Factory.address);
 
-  /* NFTMintContract Deployment */
-  const ERC721Mint = await hre.thor.getContractFactory("ERC721Mint");
-  const erc721Mint = await ERC721Mint.deploy(
-    "0x2a81Ca39185349B0e54cA86d965DDC8423368952"
+  /* Auction Price NFTMarketplace Deployment */
+  const Auction = await hre.thor.getContractFactory("Auction");
+  const auction = await Auction.deploy(
+    "0xFBCE93D28Dc0B6D06C772E7E48721161A5B895b8",
+    1,
+    1664740605,
+    1664750727
   );
 
-  await erc721Mint.deployed();
+  await auction.deployed();
 
-  console.log("ERC721Mint deployed to: ", erc721Mint.address);
+  console.log("Auction Contract deployed to: ", auction.address);
 
   fs.writeFileSync(
     "./status.json",
@@ -39,6 +50,7 @@ async function main() {
       {
         mintAddress: erc721Mint.address,
         nftFactoryAddress: erc721Factory.address,
+        auctionAddress: auction.address,
       },
       "",
       2
